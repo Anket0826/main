@@ -1,0 +1,15 @@
+.card-style:hover {
+    transform: translateY(-4px);
+    box-shadow: 4px 4px 4px 4px rgb(231, 231, 231);
+}
+
+.card-style {
+    position: relative;
+    margin: 10px;
+    height: 35vh;
+}
+.edit-button {
+    position: relative;
+    bottom: 200px;
+    left: 80%;
+}

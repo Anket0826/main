@@ -1,0 +1,56 @@
+.add-popup {
+    height: 325px;
+    width: 500px;
+    position: relative;
+    top: 10px;
+    scrollbar-width: none;
+}
+Button.save{
+    border: 1px solid gray;
+    background-color: rgb(45, 66, 255);
+    width: 25%;
+    margin: 10px;
+    float: right;
+    color: white;
+}
+
+Button.cancel {
+    border: 1px solid gray;
+    width: 25%;
+    margin: 10px;
+    float: right;
+    color: black;
+}
+
+.save:hover {
+    transform: translateY(-3px);
+}
+
+.cancel:hover {
+    transform: translateY(-3px);
+}
+
+.tital-input{
+    border: 1px solid gray;
+    height: 55px;
+    width: 95%;
+    border-radius: 3px;
+    padding-left: 10px;
+}
+
+.category-input{
+    border: 1px solid gray;
+    height: 55px;
+    width: 80%;
+    border-radius: 3px;
+    padding-left: 10px;
+    margin-top: 20px;
+}
+.end-date{
+    border: 1px solid gray;
+    height: 55px;
+    width: 85%;
+    border-radius: 3px;
+    padding-left: 10px;
+    margin-left: 20px;
+}
