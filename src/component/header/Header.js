@@ -24,7 +24,7 @@ const Header = ({ tabValue, onTabChange, priorityFilter, categories2, onPriority
         document.body.classList.remove("light", "dark");
         document.body.classList.add(newTheme);
     };
-
+ 
     useEffect(() => {
         const storedCategories = JSON.parse(localStorage.getItem("categories")) || [];
         setCategories(storedCategories);
