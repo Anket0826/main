@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from "react";
 import {
     CssBaseline,
-    Container,
     Box,
     Button,
     Grid,
     Typography,
-    TextField,
     Input,
 } from "@mui/material";
-// import '../styles/style.css'
+import '../styles/theme.scss'
 import '../styles/HomePage.scss'
 import Header from "../component/header/Header";
 import Footer from "../component/footer/Footer";
@@ -19,7 +17,6 @@ import { useTasks } from "../hooks/useTasks";
 import NoTasksPlaceholder from "./NoTasksPlaceholder";
 import SearchIcon from '../assets/search-icon.svg';
 import { useLocation, useNavigate } from "react-router-dom";
-import AddSubTasks from "../component/modal/AddSubTasks";
 const HomePage = () => {
     const [tabValue, setTabValue] = useState(0);
     const { tasks, addTask, deleteTask, editTask, taskExists } = useTasks();
@@ -79,8 +76,7 @@ const HomePage = () => {
             if (tabValue === 1) return task.status === "Pending";
             if (tabValue === 2) return task.status === "Completed";
             if (tabValue === 3) return task.priority === "High";
-            // if (tabValue === 4) return task.categoriess === "Work";
-            return
+            return;
         })
         .filter((task) => {
             if (priorityFilter) return task.priority === priorityFilter;
@@ -111,7 +107,7 @@ const HomePage = () => {
                     <Button className="tasks-add" variant="contained" onClick={() => handleOpenModal()}>
                         Add New Task
                     </Button>
-                    <img src={SearchIcon} className="search-icon" />
+                    <img src={SearchIcon} className="search-icon" alt=""/>
                     <Input
                         sx={{
                             width: "20%",

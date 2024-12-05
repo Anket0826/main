@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { AppBar, Toolbar, Typography, Popover, Tabs, Tab, Switch, Button, Box } from "@mui/material";
+import { AppBar, Toolbar, Typography, Popover, Tabs, Tab, Switch, Button } from "@mui/material";
 import '../../styles/Header.scss';
-import logout from '../../assets/logout.svg'
 import UserImages  from '../../assets/user.png'
 import { Link } from "react-router-dom";
 const Header = ({ tabValue, onTabChange, priorityFilter, categories2, onPriorityChange, handleCategoryChange }) => {
@@ -9,7 +8,6 @@ const Header = ({ tabValue, onTabChange, priorityFilter, categories2, onPriority
     const [theme, setTheme] = useState("light");
     const [userName, setUserName] = useState('');
     const [email, setEmail] = useState('');
-
 
     useEffect(() => {
         const savedTheme = localStorage.getItem("theme") || "light";
@@ -43,7 +41,6 @@ const Header = ({ tabValue, onTabChange, priorityFilter, categories2, onPriority
     const isOpen = Boolean(anchorEl);
 
     useEffect(() => {
-        // Fetch user data from localStorage
         const usersData = JSON.parse(localStorage.getItem("user")) || {};
         setUserName(usersData.name || "Guest");
         setEmail(usersData.email || "No Email Available");
@@ -96,7 +93,7 @@ const Header = ({ tabValue, onTabChange, priorityFilter, categories2, onPriority
 
                     <Typography pl={3}>
                         <span onClick={handleOpen} style={{ cursor: "pointer", fontSize:"15px"}}>
-                         <img className="user-image" src={UserImages}/>   {userName}
+                         <img className="user-image" src={UserImages} alt=""/>   {userName}
                         </span>
                         <Popover
 

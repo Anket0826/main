@@ -1,0 +1,137 @@
+
+/* Light Theme */
+body.light {
+    background-color: white;
+    color: black;
+}
+
+/* Dark Theme */
+body.dark {
+    background-color: #121212;
+    color: white;
+}
+
+body.light .search-icon {
+    color: black;
+}
+
+body.light .search-field {
+    border: 1px solid grey; 
+        color: black;
+}
+
+body.light .status{
+    color: black;
+}
+body.dark .status{
+    color: white;
+}
+
+body.dark .search-icon{
+    color: white;
+}
+
+body.dark .search-field {
+    border: 1px solid white; 
+    color: white;
+}
+
+body.light .card-style {
+    background-color: white;
+    color: black;
+    border: 1px solid #ddd;
+}
+
+
+body.dark .card-style {
+    background-color: #333;
+    color: white;
+    border: 1px solid #555;
+}
+
+body.dark .MuiPopover-paper{
+    background-color: #333;
+    color: white;
+}
+body.light .MuiPopover-paper{
+    background-color: white;
+    color: black;
+}
+
+body.dark .menu-theme .MuiPaper-root {
+    background-color: #333;
+    color: white;
+}
+
+body.dark .add-theme .MuiPaper-root{
+    background-color: #333;
+    color: white;
+}
+
+/* Dark theme styles */
+body.dark .tital-input{
+    background-color: #333;
+    color: white;
+    border-color: white;
+}
+
+body.dark .MuiOutlinedInput-input {
+    background-color: #333;
+    color: white;
+    border-color: white;
+}
+
+body.light .text-field-container .MuiOutlinedInput-input:not([multiple]) option {
+    background-color: white !important;
+    color: black !important;
+    border: 1px solid black !important;
+    border-radius: 3px !important;
+}
+
+body.dark .text-field-container .MuiOutlinedInput-input:not([multiple]) option{
+    background-color: #333 !important;
+    color: white !important;
+    border: 1px solid white !important;
+    border-radius: 3px !important;
+}
+
+body.light .priority-select option {
+    background-color: white;
+    color: black;
+    border-color: black;
+  }
+
+  body.dark .priority-select option {
+    background-color: #333;
+    color: white;
+    border-color: white;
+  }
+
+body.light .MuiDialog-paper{
+    background-color: white;
+    color: black;
+}
+
+body.dark .MuiDialog-paper{
+    background-color: #333;
+    color: white;
+}
+
+body.light .MuiDialogContentText-root{
+    background-color: white;
+    color: black;
+}
+body.dark .MuiDialogContentText-root{
+    background-color: #333;
+    color: white;
+}
+
+body.light .cancel.MuiButton-root{
+    background-color: white;
+    color: black;
+}
+
+body.dark .cancel.MuiButton-root{
+    background-color: #333;
+    color: white;
+}

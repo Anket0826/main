@@ -41,10 +41,14 @@ const Login = () => {
       if(!validateFields()){
         return
       }
-      if(!email.trim()){
-        setError('Email address is already registered.')
-        return
+
+      const users = JSON.parse(localStorage.getItem('user')) || [];
+      const userExists = Array.isArray(users) && users.some(user => user.email === email);
+      if (userExists) {
+          toast.error('This email is already registered. Please use a different email.');
+          return;
       }
+
         try {
             const response = await fetch('https://jsonplaceholder.typicode.com/users', {
                 method: "POST",
