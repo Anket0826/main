@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { AppBar, Toolbar, Typography, Popover, Tabs, Tab, Switch, Button } from "@mui/material";
+import { AppBar, Toolbar, Typography, Popover, Tabs, Tab, Switch, Button, DialogActions, DialogContentText, DialogContent, DialogTitle, Dialog } from "@mui/material";
 import '../../styles/Header.scss';
-import UserImages  from '../../assets/user.png'
+import UserImages from '../../assets/user.png'
 import { Link } from "react-router-dom";
 const Header = ({ tabValue, onTabChange, priorityFilter, categories2, onPriorityChange, handleCategoryChange }) => {
     const [categories, setCategories] = useState([]);
     const [theme, setTheme] = useState("light");
     const [userName, setUserName] = useState('');
     const [email, setEmail] = useState('');
+    const [isLogoutOpen, setIsLogoutOpen] = useState(false);
 
     useEffect(() => {
         const savedTheme = localStorage.getItem("theme") || "light";
@@ -22,7 +23,7 @@ const Header = ({ tabValue, onTabChange, priorityFilter, categories2, onPriority
         document.body.classList.remove("light", "dark");
         document.body.classList.add(newTheme);
     };
- 
+
     useEffect(() => {
         const storedCategories = JSON.parse(localStorage.getItem("categories")) || [];
         setCategories(storedCategories);
@@ -41,10 +42,23 @@ const Header = ({ tabValue, onTabChange, priorityFilter, categories2, onPriority
     const isOpen = Boolean(anchorEl);
 
     useEffect(() => {
-        const usersData = JSON.parse(localStorage.getItem("user")) || {};
+        const usersData = JSON.parse(localStorage.getItem("currentUser")) || [];
         setUserName(usersData.name || "Guest");
         setEmail(usersData.email || "No Email Available");
     }, []);
+
+    const handleLogout = () => {
+        setIsLogoutOpen(true);
+        window.location.href = "/";
+    };
+
+    const handleOpenLogoutDialog = () => {
+        setIsLogoutOpen(true);
+    };
+
+    const handleCloseDialog = () => {
+        setIsLogoutOpen(false);
+    };
 
     return (
         <Typography className="main-header">
@@ -92,8 +106,8 @@ const Header = ({ tabValue, onTabChange, priorityFilter, categories2, onPriority
                     </select>
 
                     <Typography pl={3}>
-                        <span onClick={handleOpen} style={{ cursor: "pointer", fontSize:"15px"}}>
-                         <img className="user-image" src={UserImages} alt=""/>   {userName}
+                        <span onClick={handleOpen} style={{ cursor: "pointer", fontSize: "15px" }}>
+                            <img className="user-image" src={UserImages} alt="" />   {userName}
                         </span>
                         <Popover
 
@@ -114,15 +128,33 @@ const Header = ({ tabValue, onTabChange, priorityFilter, categories2, onPriority
                                     /> {theme === "light" ? 'Light Mode' : 'Dark Mode'}
                                 </Typography>
                                 <Typography>
-
-                                    <Link to={'/'} > <Button sx={{ color: 'red' }}>
+                                    <Button onClick={handleOpenLogoutDialog} sx={{ color: 'red' }}>
                                         Log Out    <i className="fa-solid fa-arrow-right-from-bracket"></i>
                                     </Button>
-                                    </Link>
                                 </Typography>
                             </Typography>
                         </Popover>
                     </Typography>
+                    <Dialog
+                        open={isLogoutOpen}
+                        onClose={handleCloseDialog}
+                        className="logout-dialog"
+                    >
+                        <DialogTitle>Confirm Logout</DialogTitle>
+                        <DialogContent>
+                            <DialogContentText>
+                                Are you sure you want to log out?
+                            </DialogContentText>
+                        </DialogContent>
+                        <DialogActions>
+                            <Button onClick={handleCloseDialog} className="cancel" sx={{ color: "white", border: '1px solid gray' }}>
+                                Cancel
+                            </Button>
+                            <Button onClick={handleLogout} sx={{ backgroundColor: "blue", color: "white", border: '1px solid gray' }} >
+                                Log Out
+                            </Button>
+                        </DialogActions>
+                    </Dialog>
                 </Toolbar>
             </AppBar>
         </Typography>

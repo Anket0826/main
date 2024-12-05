@@ -103,7 +103,7 @@ const HomePage = () => {
             <CssBaseline />
             <Header tabValue={tabValue} onTabChange={handleTabChange} priorityFilter={priorityFilter} onPriorityChange={handlePriorityChange} handleCategoryChange={handleCategoryChange} categories2={categories} />
             <Typography >
-                <Box mt={4} justifyContent="space-between" alignItems="center">
+                <Box mt={2} justifyContent="space-between" alignItems="center">
                     <Button className="tasks-add" variant="contained" onClick={() => handleOpenModal()}>
                         Add New Task
                     </Button>

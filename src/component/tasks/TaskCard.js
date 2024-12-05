@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Card,
   CardContent,
@@ -81,20 +81,41 @@ const TaskCard = ({ task, onDelete, onEdit, onStatusUpdate }) => {
   };
 
   const formatDate = (dateString) => {
-    const date = new Date(dateString)
+    if (!dateString) return 'Invalid date';
+    const date = new Date(dateString);
+    if (isNaN(date)) return 'Invalid date';
     return new Intl.DateTimeFormat('en-GB', {
       day: '2-digit',
       month: '2-digit',
       year: 'numeric',
-    }).format(date)
-  }
+    }).format(date);
+  };
+
   const progress = task.status === "Completed" ? 100 : 50;
   const progressColor = task.status === "Completed" ? "green" : "orange"
+
+  const isNearEndDate = (endDate, status) => {
+    if (status === "Completed") return false;
+    if (!endDate) return false;
+    const today = new Date();
+    const taskEndDate = new Date(endDate);
+    const diffInDays = Math.ceil((taskEndDate - today) / (1000 * 60 * 60 * 24));
+    return diffInDays <= 1;
+  };
+
+  const taskNameClass = isNearEndDate(task.endDate, task.status)
+  ? "task-name-highlight"
+  : "";
+
+
   return (
     <>
       <Card className="card-style">
         <CardContent>
-          <Typography variant="h5">
+          <Typography
+            variant="h5"
+            className={taskNameClass}
+          >
             <TruncatedText text={task.tital} maxLength={15} />
           </Typography>
           <Typography
@@ -108,7 +129,7 @@ const TaskCard = ({ task, onDelete, onEdit, onStatusUpdate }) => {
             <Typography variant="body2" color={priorityColors[task.priority]}>
               <span className="status">Priority:</span> {task.priority}
             </Typography>
-            <Box position="relative" display="inline-flex" ml={18}>
+            <Box position="relative" display="inline-flex" className="pogress-bar">
               <CircularProgress
                 variant="determinate"
                 value={progress}
@@ -166,6 +187,8 @@ const TaskCard = ({ task, onDelete, onEdit, onStatusUpdate }) => {
             />
 
           </Typography>
+          <Typography variant="body2">End date: {formatDate(task.endDate)}</Typography>
+
         </CardContent>
         <CardActions >
           <IconButton className="edit-button status" onClick={handleMenuClick}>

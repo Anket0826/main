@@ -6,10 +6,33 @@
 .card-style {
     position: relative;
     margin: 10px;
-    height: 35vh;
+    height: 36vh;
 }
 .edit-button {
     position: relative;
-    bottom: 200px;
+    bottom: 220px;
     left: 80%;
 }
+.pogress-bar{
+    margin-left: 145px;
+}
+
+@keyframes highlightGlow {
+    0% {
+      color: red;
+      text: 0 0 5px red, 0 0 10px red, 0 0 20px red;
+    }
+    50% {
+      color: orange;
+      text: 0 0 10px orange, 0 0 15px orange, 0 0 25px orange;
+    }
+    100% {
+      color: red;
+      text: 0 0 5px red, 0 0 10px red, 0 0 20px red;
+    }
+  }
+  
+  .task-name-highlight {
+    animation: highlightGlow 0.4s infinite;
+    font-weight: bold;
+  }

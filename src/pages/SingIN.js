@@ -30,36 +30,34 @@ const SingIn = () => {
         return Object.keys(newErrors).length === 0;
     };
 
-    const handleSignIn = async () => {
+    const handleSignIn = () => {
         if (!validateFields()) {
-            return
+            return;
         }
         try {
-            const response = await fetch('https://jsonplaceholder.typicode.com/users', {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    emailAddress: emailAddress,
-                    passwords: passwords,
-                })
-            })
-            if (response.ok) {
-                const users = await response.json();
-                localStorage.setItem('users', JSON.stringify(users));
-                toast.success('User created successfully', {
-                    style: { backgroundColor: "green", color: "white", height: "15px" }
+            const storedUsers = JSON.parse(localStorage.getItem('user')) || [];
+            const user = storedUsers.find(
+                (u) => u.email.toLowerCase() === emailAddress.toLowerCase() && u.password === passwords
+            );
+
+            if (user) {
+                localStorage.setItem('currentUser', JSON.stringify(user));
+
+                toast.success('Sign In successful', {
+                    style: { backgroundColor: 'green', color: 'white', height: '15px' },
                 });
                 setTimeout(() => {
                     navigate('/home');
-                }, 2000)
+                }, 2000);
+            } else {
+                toast.error('Invalid email or password. Please try again.', {
+                    autoClose: 3000,
+                });
             }
         } catch (error) {
-            console.log("Error while navigating to home page");
+            console.error('Error during sign-in:', error);
         }
     };
-
     return (
         <Typography>
             <ToastContainer autoClose={2000} />

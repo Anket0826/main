@@ -4,6 +4,7 @@
     position: relative;
     top: 10px;
     scrollbar-width: none;
+    overflow: hidden;
 }
 Button.save{
     border: 1px solid gray;
@@ -54,4 +55,8 @@ Button.cancel {
     padding-left: 10px;
     margin-left: 20px;
     background: transparent;
+}
+.react-datepicker{
+    position: relative;
+    right: 30px;
 }

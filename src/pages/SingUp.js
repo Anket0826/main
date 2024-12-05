@@ -38,41 +38,56 @@ const Login = () => {
     };
 
     const handleSignIn = async () => {
-      if(!validateFields()){
-        return
-      }
-
-      const users = JSON.parse(localStorage.getItem('user')) || [];
-      const userExists = Array.isArray(users) && users.some(user => user.email === email);
-      if (userExists) {
-          toast.error('This email is already registered. Please use a different email.');
-          return;
-      }
-
+        if (!validateFields()) {
+            return;
+        }
+        const newUserId = +Date.now();
         try {
+            let users = JSON.parse(localStorage.getItem('user')) || [];
+            if (!Array.isArray(users)) {
+                users = [];
+            }
+            const userExists = users.some(user => user.email.toLowerCase() === email.toLowerCase());
+            if (userExists) {
+                toast.error('This email is already registered. Please use a different email.', {
+                    style: { backgroundColor: "red", color: "white" }, autoClose: 3000,
+                });
+                return;
+            }
+
             const response = await fetch('https://jsonplaceholder.typicode.com/users', {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
+                    userId: newUserId,
                     name: userName,
                     email: email,
                     password: password,
                 })
-            })
+            });
+
             if (response.ok) {
                 const user = await response.json();
-                localStorage.setItem('user', JSON.stringify(user));
+                const newUser = {
+                    userId: newUserId,
+                    name: userName,
+                    email: email,
+                    password: password,
+                };
+                users.push(newUser);
+                localStorage.setItem('user', JSON.stringify(users));
+                localStorage.setItem("currentUser", JSON.stringify(newUser));
                 toast.success('User created successfully', {
                     style: { backgroundColor: "green", color: "white", height: "15px" }
                 });
                 setTimeout(() => {
                     navigate('/');
-                }, 2000)
+                }, 2000);
             }
         } catch (error) {
-            console.log("Error while navigating to home page");
+            console.log("Error while navigating to home page", error);
         }
     };
 
@@ -102,22 +117,22 @@ const Login = () => {
                                 placeholder='Enter your full name'
                                 value={userName}
                                 onChange={(e) => setUserName(e.target.value)}
-                              
+
                             />
-                             {error.userName && <span className='validation-error'>{error.userName}</span>}
+                            {error.userName && <span className='validation-error'>{error.userName}</span>}
                             <br />
 
-                            <Typography variant="body1" sx={{ mt: 2,fontSize: "15px" }}>Email Address</Typography>
+                            <Typography variant="body1" sx={{ mt: 2, fontSize: "15px" }}>Email Address</Typography>
                             <Input
                                 className='sing-input tital-input'
                                 placeholder='Enter your email'
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                             />
-                             {error.email && <span className='validation-error'>{error.email}</span>}
+                            {error.email && <span className='validation-error'>{error.email}</span>}
                             <br />
 
-                            <Typography variant="body1" sx={{ mt: 2,fontSize: "15px" }}>Password</Typography>
+                            <Typography variant="body1" sx={{ mt: 2, fontSize: "15px" }}>Password</Typography>
                             <Input
                                 className='sing-input tital-input'
                                 placeholder='Enter your password'
@@ -125,7 +140,7 @@ const Login = () => {
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                             />
-                             {error.password && <span className='validation-error'>{error.password}</span>}
+                            {error.password && <span className='validation-error'>{error.password}</span>}
                             <br />
 
                             <Button
@@ -141,11 +156,11 @@ const Login = () => {
                                 Sign Up
                             </Button>
                             <Typography fontSize={13} mt={2}>
-                            By clicking sign up, you agree to our Terms of Use and Privacy Policy
+                                By clicking sign up, you agree to our Terms of Use and Privacy Policy
                             </Typography>
                             <Typography mt={1} ml={13}>
-                            Already registered? <Link style={{textDecorationLine: 'none'}} to={'/'}>Sing In</Link>
-                                </Typography>
+                                Already registered? <Link style={{ textDecorationLine: 'none' }} to={'/'}>Sing In</Link>
+                            </Typography>
                         </Typography>
 
                     </Typography>
