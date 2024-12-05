@@ -136,7 +136,7 @@ const TaskModal = ({ open, onClose, onSave, task }) => {
                             error={Boolean(errors.tital)}
                         />
                         <DatePicker
-                            className="end-date"
+                            className="end-date tital-input"
                             selected={endDate}
                             onChange={handleDateChange}
                             dateFormat='dd/MM/yyyy'

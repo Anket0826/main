@@ -82,7 +82,7 @@ const Login = () => {
             <Grid container spacing={1} justifyContent="center">
                 <Grid item xs={6} className="">
                     <Typography>
-                        <img src={Images} height={606} width={670} />
+                        <img src={Images} className='singUP-png' width={670} />
                     </Typography>
                 </Grid>
 
