@@ -30,6 +30,20 @@ const SingIn = () => {
         return Object.keys(newErrors).length === 0;
     };
 
+    const EmailAddress = (e) => {
+        setEmailAddress(e.target.value)
+        setError((prevErrors) => ({
+            ...prevErrors, emailAddress: ''
+        }))
+    }
+
+    const PasswordChange = (e) => {
+        setPasswords(e.target.value)
+        setError((prevErrors) => ({
+            ...prevErrors, passwords: ''
+        }))
+    }
+
     const handleSignIn = () => {
         if (!validateFields()) {
             return;
@@ -52,6 +66,7 @@ const SingIn = () => {
             } else {
                 toast.error('Invalid email or password. Please try again.', {
                     autoClose: 3000,
+                    style: { backgroundColor: "red", color: "white", height: "15px" }
                 });
             }
         } catch (error) {
@@ -73,35 +88,37 @@ const SingIn = () => {
                         <Typography
                             variant='h4'
                             fontWeight="bold"
-                            ml={30}
+                            ml={35}
                             pt={17}
                         >Sing In</Typography>
 
                         <Typography className='text-color' ml={15}>
                             <Typography variant="body1" sx={{ mt: 2, fontSize: "15px" }}>Email Address</Typography>
-                            <Input
+                            <TextField
                                 className='sing-input tital-input'
                                 placeholder='Enter your email'
                                 value={emailAddress}
-                                onChange={(e) => setEmailAddress(e.target.value)}
+                                onChange={EmailAddress}
+                                helperText={error.emailAddress}
+                                error={Boolean(error.emailAddress || false)}
                             />
-                            {error.email && <span className='validation-error'>{error.email}</span>}
                             <br />
 
-                            <Typography variant="body1" sx={{ mt: 2, fontSize: "15px" }}>Password</Typography>
-                            <Input
+                            <Typography variant="body1" sx={{ mt: 5, fontSize: "15px" }}>Password</Typography>
+                            <TextField
                                 className='sing-input tital-input'
                                 placeholder='Enter your password'
                                 type="password"
                                 value={passwords}
-                                onChange={(e) => setPasswords(e.target.value)}
+                                onChange={PasswordChange}
+                                helperText={error.passwords}
+                                error={Boolean(error.passwords)}
                             />
-                            {error.password && <span className='validation-error'>{error.password}</span>}
                             <br />
 
                             <Button
                                 sx={{
-                                    mt: "25px",
+                                    mt: "40px",
                                     width: "80%",
                                     backgroundColor: "blue",
                                     color: "white",
@@ -111,9 +128,9 @@ const SingIn = () => {
                             >
                                 Sign In
                             </Button>
-                          
+
                             <Typography mt={4} ml={18}>
-                                <Link style={{textDecorationLine: 'none'}} to={'/singup'}>Create a new account</Link>
+                                <Link style={{ textDecorationLine: 'none' }} to={'/singup'}>Create a new account</Link>
                             </Typography>
                         </Typography>
 

@@ -121,14 +121,15 @@ const Header = ({ tabValue, onTabChange, priorityFilter, categories2, onPriority
                                 <Typography mt={1}> {email || "Email not set"}</Typography>
 
                                 <Typography sx={{ paddingRight: "50px" }} mt={2}>
+                                {theme === "light" ? 'Light Mode' : 'Dark Mode'}
                                     <Switch
                                         checked={theme === "dark"}
                                         onChange={toggleTheme}
                                         color="default"
-                                    /> {theme === "light" ? 'Light Mode' : 'Dark Mode'}
+                                    /> 
                                 </Typography>
-                                <Typography>
-                                    <Button onClick={handleOpenLogoutDialog} sx={{ color: 'red' }}>
+                                <Typography mt={1}>
+                                    <Button onClick={handleOpenLogoutDialog} color="white">
                                         Log Out    <i className="fa-solid fa-arrow-right-from-bracket"></i>
                                     </Button>
                                 </Typography>
@@ -138,16 +139,15 @@ const Header = ({ tabValue, onTabChange, priorityFilter, categories2, onPriority
                     <Dialog
                         open={isLogoutOpen}
                         onClose={handleCloseDialog}
-                        className="logout-dialog"
                     >
                         <DialogTitle>Confirm Logout</DialogTitle>
                         <DialogContent>
                             <DialogContentText>
-                                Are you sure you want to log out?
+                                Are you sure you want to log out ?
                             </DialogContentText>
                         </DialogContent>
                         <DialogActions>
-                            <Button onClick={handleCloseDialog} className="cancel" sx={{ color: "white", border: '1px solid gray' }}>
+                            <Button onClick={handleCloseDialog} className="cancel" sx={{ color: "white", width: "50%", border: '1px solid gray' }}>
                                 Cancel
                             </Button>
                             <Button onClick={handleLogout} sx={{ backgroundColor: "blue", color: "white", border: '1px solid gray' }} >

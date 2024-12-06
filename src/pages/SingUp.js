@@ -6,7 +6,6 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Images from '../assets/singIn.png'
 const Login = () => {
-    const [phoneNumber, setPhoneNumber] = useState('');
     const [error, setError] = useState('');
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
@@ -37,6 +36,25 @@ const Login = () => {
         return Object.keys(newErrors).length === 0;
     };
 
+    const handleNameChange = (e) => {
+        setUserName(e.target.value)
+        setError((prevErrors) => ({
+            ...prevErrors, userName: ''
+        }))
+    }
+    const handleEmailChange = (e) => {
+        setEmail(e.target.value)
+        setError((prevErrors) => ({
+            ...prevErrors, email: ''
+        }))
+    }
+    const handlePasswordChange = (e) => {
+        setPassword(e.target.value)
+        setError((prevErrors) => ({
+            ...prevErrors, password: ''
+        }))
+    }
+
     const handleSignIn = async () => {
         if (!validateFields()) {
             return;
@@ -54,7 +72,6 @@ const Login = () => {
                 });
                 return;
             }
-
             const response = await fetch('https://jsonplaceholder.typicode.com/users', {
                 method: "POST",
                 headers: {
@@ -67,7 +84,6 @@ const Login = () => {
                     password: password,
                 })
             });
-
             if (response.ok) {
                 const user = await response.json();
                 const newUser = {
@@ -79,7 +95,7 @@ const Login = () => {
                 users.push(newUser);
                 localStorage.setItem('user', JSON.stringify(users));
                 localStorage.setItem("currentUser", JSON.stringify(newUser));
-                toast.success('User created successfully', {
+                toast.success('This Email Register successfully', {
                     style: { backgroundColor: "green", color: "white", height: "15px" }
                 });
                 setTimeout(() => {
@@ -112,40 +128,43 @@ const Login = () => {
 
                         <Typography className='text-color' ml={15}>
                             <Typography variant="body1" sx={{ mt: 2, fontSize: "15px" }}>Full Name</Typography>
-                            <Input
+                            <TextField
                                 className='sing-input tital-input'
                                 placeholder='Enter your full name'
                                 value={userName}
-                                onChange={(e) => setUserName(e.target.value)}
+                                onChange={handleNameChange}
+                                helperText={error.userName}
+                                error={Boolean(error.userName)}
 
                             />
-                            {error.userName && <span className='validation-error'>{error.userName}</span>}
                             <br />
 
-                            <Typography variant="body1" sx={{ mt: 2, fontSize: "15px" }}>Email Address</Typography>
-                            <Input
+                            <Typography variant="body1" sx={{ mt: 5, fontSize: "15px" }}>Email Address</Typography>
+                            <TextField
                                 className='sing-input tital-input'
                                 placeholder='Enter your email'
                                 value={email}
-                                onChange={(e) => setEmail(e.target.value)}
+                                onChange={handleEmailChange}
+                                helperText={error.email}
+                                error={Boolean(error.email)}
                             />
-                            {error.email && <span className='validation-error'>{error.email}</span>}
                             <br />
 
-                            <Typography variant="body1" sx={{ mt: 2, fontSize: "15px" }}>Password</Typography>
-                            <Input
+                            <Typography variant="body1" sx={{ mt: 5, fontSize: "15px" }}>Password</Typography>
+                            <TextField
                                 className='sing-input tital-input'
                                 placeholder='Enter your password'
                                 type="password"
                                 value={password}
-                                onChange={(e) => setPassword(e.target.value)}
+                                onChange={handlePasswordChange}
+                                helperText={error.password}
+                                error={Boolean(error.password)}
                             />
-                            {error.password && <span className='validation-error'>{error.password}</span>}
                             <br />
 
                             <Button
                                 sx={{
-                                    mt: "25px",
+                                    mt: "40px",
                                     width: "80%",
                                     backgroundColor: "blue",
                                     color: "white",
