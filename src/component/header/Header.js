@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { AppBar, Toolbar, Typography, Popover, Tabs, Tab, Switch, Button, DialogActions, DialogContentText, DialogContent, DialogTitle, Dialog } from "@mui/material";
 import '../../styles/Header.scss';
 import UserImages from '../../assets/user.png'
-import { Link } from "react-router-dom";
 const Header = ({ tabValue, onTabChange, priorityFilter, categories2, onPriorityChange, handleCategoryChange }) => {
     const [categories, setCategories] = useState([]);
     const [theme, setTheme] = useState("light");
@@ -61,10 +60,9 @@ const Header = ({ tabValue, onTabChange, priorityFilter, categories2, onPriority
     };
 
     return (
-        <Typography className="main-header">
+        <Typography>
             <AppBar className="main-header" position="static">
                 <Toolbar>
-
                     <Typography variant="h4" sx={{ flexGrow: 1 }}>
                         Todo List App
                     </Typography>

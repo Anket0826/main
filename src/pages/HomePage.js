@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import {
-    CssBaseline,
     Box,
     Button,
     Grid,
@@ -15,8 +14,8 @@ import TaskCard from "../component/tasks/TaskCard";
 import TaskModal from "../component/modal/TaskModal";
 import { useTasks } from "../hooks/useTasks";
 import NoTasksPlaceholder from "./NoTasksPlaceholder";
-import SearchIcon from '../assets/search-icon.svg';
 import { useLocation, useNavigate } from "react-router-dom";
+import { Search } from "@mui/icons-material";
 const HomePage = () => {
     const [tabValue, setTabValue] = useState(0);
     const { tasks, addTask, deleteTask, editTask, taskExists } = useTasks();
@@ -76,7 +75,7 @@ const HomePage = () => {
             if (tabValue === 1) return task.status === "Pending";
             if (tabValue === 2) return task.status === "Completed";
             if (tabValue === 3) return task.priority === "High";
-            return;
+            return false;
         })
         .filter((task) => {
             if (priorityFilter) return task.priority === priorityFilter;
@@ -100,20 +99,21 @@ const HomePage = () => {
 
     return (
         <>
-            <CssBaseline />
+            {/* <CssBaseline /> */}
             <Header tabValue={tabValue} onTabChange={handleTabChange} priorityFilter={priorityFilter} onPriorityChange={handlePriorityChange} handleCategoryChange={handleCategoryChange} categories2={categories} />
             <Typography >
                 <Box mt={2} justifyContent="space-between" alignItems="center">
                     <Button className="tasks-add" variant="contained" onClick={() => handleOpenModal()}>
                         Add New Task
                     </Button>
-                    <img src={SearchIcon} className="search-icon" alt=""/>
+                    <Search className="search-icon"/>
                     <Input
                         sx={{
                             width: "20%",
                             left: "1%",
                             position: "relative",
                             height: "42px",
+                            cursor:"pointer"
                         }}
                         type="text"
                         className="search-field"

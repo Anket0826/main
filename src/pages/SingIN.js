@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Typography, Grid, Input, Button, TextField } from '@mui/material';
+import { Typography, Grid, Button, TextField } from '@mui/material';
 import '../styles/Login.scss';
 import { Link, useNavigate } from 'react-router-dom';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast, Toaster } from 'react-hot-toast';
 import 'react-toastify/dist/ReactToastify.css';
 import Images from '../assets/singIn.png'
 const SingIn = () => {
@@ -57,17 +57,15 @@ const SingIn = () => {
             if (user) {
                 localStorage.setItem('currentUser', JSON.stringify(user));
 
-                toast.success('Sign In successful', {
-                    style: { backgroundColor: 'green', color: 'white', height: '15px' },
+                toast.success('Sign In Successfully.', {
+                    style: { backgroundColor: 'green', color: 'white', height: "60px", width: "300px", paddingRight: "100px"},
                 });
                 setTimeout(() => {
                     navigate('/home');
                 }, 2000);
             } else {
-                toast.error('Invalid email or password. Please try again.', {
-                    autoClose: 3000,
-                    style: { backgroundColor: "red", color: "white", height: "15px" }
-                });
+                toast.error('Invalid email or password. Please try again.');
+                
             }
         } catch (error) {
             console.error('Error during sign-in:', error);
@@ -75,11 +73,11 @@ const SingIn = () => {
     };
     return (
         <Typography>
-            <ToastContainer autoClose={2000} />
+            <Toaster position='top-right'/>
             <Grid container spacing={1} justifyContent="center">
                 <Grid item xs={6} className="">
                     <Typography>
-                        <img src={Images} className='singUP-png' width={670} />
+                        <img src={Images} className='singUP-png' alt='' width={670} />
                     </Typography>
                 </Grid>
 

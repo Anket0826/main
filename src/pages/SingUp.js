@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Typography, Grid, Input, Button, TextField } from '@mui/material';
+import { Typography, Grid, Button, TextField } from '@mui/material';
 import '../styles/Login.scss';
 import { Link, useNavigate } from 'react-router-dom';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast, Toaster } from 'react-hot-toast';
 import 'react-toastify/dist/ReactToastify.css';
 import Images from '../assets/singIn.png'
 const Login = () => {
@@ -68,7 +68,7 @@ const Login = () => {
             const userExists = users.some(user => user.email.toLowerCase() === email.toLowerCase());
             if (userExists) {
                 toast.error('This email is already registered. Please use a different email.', {
-                    style: { backgroundColor: "red", color: "white" }, autoClose: 3000,
+                autoClose: 3000,
                 });
                 return;
             }
@@ -86,6 +86,7 @@ const Login = () => {
             });
             if (response.ok) {
                 const user = await response.json();
+                console.log(user);
                 const newUser = {
                     userId: newUserId,
                     name: userName,
@@ -95,8 +96,8 @@ const Login = () => {
                 users.push(newUser);
                 localStorage.setItem('user', JSON.stringify(users));
                 localStorage.setItem("currentUser", JSON.stringify(newUser));
-                toast.success('This Email Register successfully', {
-                    style: { backgroundColor: "green", color: "white", height: "15px" }
+                toast.success('This Email Register successfully.', {
+                    style: { backgroundColor: 'green', color: 'white', height: "60px", width: "400px", paddingRight: "100px" },
                 });
                 setTimeout(() => {
                     navigate('/');
@@ -109,11 +110,11 @@ const Login = () => {
 
     return (
         <Typography>
-            <ToastContainer autoClose={2000} />
+            <Toaster position='top-right' autoClose={2000} />
             <Grid container spacing={1} justifyContent="center">
                 <Grid item xs={6} className="">
                     <Typography>
-                        <img src={Images} className='singUP-png' width={670} />
+                        <img src={Images} className='singUP-png' alt='' width={670} />
                     </Typography>
                 </Grid>
 

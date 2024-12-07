@@ -1,6 +1,5 @@
 import React from "react";
 import HomePage from "./pages/HomePage";
-import { CssBaseline, Typography } from "@mui/material";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import NoTaskFound from "./component/NoPageFound";
 import Login from "./pages/SingUp";
@@ -8,7 +7,6 @@ import SingIn from "./pages/SingIN";
 
 function App() {
   return (
-    <CssBaseline>
       <Router>
         <Routes>
         <Route path="/" element={<SingIn />} />
@@ -20,7 +18,6 @@ function App() {
           <Route path="*" element={<NoTaskFound />} />
         </Routes>
       </Router>
-    </CssBaseline>
   );
 }
 

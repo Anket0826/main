@@ -24,7 +24,7 @@ import { useTasks } from "../../hooks/useTasks";
 
 const TaskCard = ({ task, onDelete, onEdit, onStatusUpdate }) => {
   const [anchorEl, setAnchorEl] = useState(null);
-  const { tasks, addTask, editTask, taskExists } = useTasks();
+  const { addTask, editTask, taskExists } = useTasks();
   const [editData, setEditData] = useState(null);
   const [OpenSubTasks, setOpenSubTasks] = useState(false);
   const [deletePopup, setDeletePopup] = useState(false);
@@ -167,9 +167,7 @@ const TaskCard = ({ task, onDelete, onEdit, onStatusUpdate }) => {
           </Typography>
 
           <Typography display={'flex'} alignItems={'center'}>
-
             <Typography variant="body2">Created date: {formatDate(task.createdOn)}</Typography>
-
             <AddSubTasks
               OpenSubTasks={OpenSubTasks}
               handleClose={handleClose}
