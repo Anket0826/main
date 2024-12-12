@@ -15,10 +15,15 @@
 }
 
 .user-image {
-    height: 28px;
-    width: 30px;
+    height: 32px;
+    width: 32px;
+    align-items: center;
+    padding-left: 10px;
+    padding-top: 5px;
     border-radius: 20px;
-
+    background-color: rgb(189, 189, 189);
+    position: relative;
+    bottom: 2px;
 }
 
 .users-popup {

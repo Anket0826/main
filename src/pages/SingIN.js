@@ -93,7 +93,7 @@ const SingIn = () => {
                         <Typography className='text-color' ml={15}>
                             <Typography variant="body1" sx={{ mt: 2, fontSize: "15px" }}>Email Address</Typography>
                             <TextField
-                                className='sing-input tital-input'
+                                className='sing-input '
                                 placeholder='Enter your email'
                                 value={emailAddress}
                                 onChange={EmailAddress}
@@ -104,7 +104,7 @@ const SingIn = () => {
 
                             <Typography variant="body1" sx={{ mt: 5, fontSize: "15px" }}>Password</Typography>
                             <TextField
-                                className='sing-input tital-input'
+                                className='sing-input'
                                 placeholder='Enter your password'
                                 type="password"
                                 value={passwords}

@@ -103,12 +103,11 @@ const Header = ({ tabValue, onTabChange, priorityFilter, categories2, onPriority
                         ))}
                     </select>
 
-                    <Typography pl={3}>
-                        <span onClick={handleOpen} style={{ cursor: "pointer", fontSize: "15px" }}>
-                            <img className="user-image" src={UserImages} alt="" />   {userName}
-                        </span>
+                    <Typography pl={2}>
+                        <Typography onClick={handleOpen} style={{paddingTop: "7px", cursor: "pointer", fontSize: "15px", justifyItems: "center", display: "flex", gap: "7px" }}>
+                            <span className="user-image">{userName.slice(0, 1)}</span>  {userName}
+                        </Typography>
                         <Popover
-
                             sx={{ marginTop: "45px" }}
                             open={isOpen}
                             anchorEl={anchorEl}
@@ -119,12 +118,12 @@ const Header = ({ tabValue, onTabChange, priorityFilter, categories2, onPriority
                                 <Typography mt={1}> {email || "Email not set"}</Typography>
 
                                 <Typography sx={{ paddingRight: "50px" }} mt={2}>
-                                {theme === "light" ? 'Light Mode' : 'Dark Mode'}
+                                    {theme === "light" ? 'Light Mode' : 'Dark Mode'}
                                     <Switch
                                         checked={theme === "dark"}
                                         onChange={toggleTheme}
                                         color="default"
-                                    /> 
+                                    />
                                 </Typography>
                                 <Typography mt={1}>
                                     <Button onClick={handleOpenLogoutDialog} color="white">
